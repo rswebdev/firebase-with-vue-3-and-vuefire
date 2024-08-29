@@ -9,6 +9,21 @@ const router = createRouter({
       name: 'home',
       component: HomePage,
     },
+    {
+      path: '/new',
+      name: 'new-cafe',
+      component: () => import('@/views/NewCafePage.vue'),
+    },
+    {
+      path: '/cafe/:id',
+      name: 'edit-cafe',
+      component: () => import('@/views/EditCafePage.vue'),
+    },
+    {
+      path: '/sign-in',
+      name: 'sign-in',
+      component: () => import('@/views/SignInPage.vue'),
+    },
   ],
 })
 
