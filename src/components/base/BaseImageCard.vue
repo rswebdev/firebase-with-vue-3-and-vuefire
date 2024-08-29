@@ -1,6 +1,4 @@
-<script setup>
-import BaseImage from './BaseImage.vue'
-</script>
+<script setup></script>
 
 <template>
   <v-card dark class="mb-4">

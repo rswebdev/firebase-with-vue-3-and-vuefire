@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { signOut } from 'firebase/auth'
 import { useCurrentUser, useFirebaseAuth } from 'vuefire'
-import BaseButton from './base/BaseButton.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import { useRouter } from 'vue-router'
 
 const auth = useFirebaseAuth()
@@ -9,7 +9,7 @@ const user = useCurrentUser()
 const router = useRouter()
 
 async function signOff() {
-  signOut(auth)
+  signOut(auth!)
     .then(() => {
       router.push('/sign-in')
     })

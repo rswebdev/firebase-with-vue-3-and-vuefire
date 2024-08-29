@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import { VueFire, VueFireAuth } from 'vuefire'
-import { firebaseApp } from '@/firebase.js'
+import { firebaseApp } from '@/firebase'
 
-import App from './App.vue'
-import router from './router'
+import App from '@/App.vue'
+import router from '@/router'
 
 // Vuetify
 import 'vuetify/styles'

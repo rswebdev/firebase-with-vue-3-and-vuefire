@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { doc, updateDoc } from '@firebase/firestore'
 import { useDocument, useFirestore } from 'vuefire'
 import BaseButton from '@/components/base/BaseButton.vue'
@@ -10,13 +10,23 @@ import BaseInput from '@/components/base/BaseInput.vue'
 import BaseCheckbox from '@/components/base/BaseCheckbox.vue'
 import FormLayout from '@/layouts/FormLayout.vue'
 
+type CafeDoc = {
+  name: string
+  location: string
+  rating: number
+  price: number
+  description: string
+  favorite: boolean
+}
+
 const db = useFirestore()
-const route = useRoute()
-const docRef = doc(db, 'cafes', route.params.id)
+const router = useRouter()
+const route = router.currentRoute.value
 
-const cafeSource = useDocument(docRef)
+const docRef = doc(db, 'cafes', [route.params.id].join(''))
+const cafeSource = useDocument<CafeDoc>(docRef)
 
-const editCafe = ref({
+const editCafe = ref<CafeDoc>({
   name: '',
   location: 'United States',
   rating: 0,
@@ -26,15 +36,22 @@ const editCafe = ref({
 })
 
 watch(cafeSource, (cafeSource) => {
+  if (!cafeSource) return
   editCafe.value = {
     ...cafeSource,
   }
 })
 
 async function updateCafe() {
-  await updateDoc(docRef, {
+  updateDoc(docRef, {
     ...editCafe.value,
   })
+    .then(() => {
+      router.push('/')
+    })
+    .catch((error) => {
+      console.error('Error updating document: ', error)
+    })
 }
 </script>
 

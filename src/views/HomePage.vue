@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 import CafeCard from '@/components/CafeCard.vue'

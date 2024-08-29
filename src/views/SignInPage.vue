@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useFirebaseAuth } from 'vuefire'
 import {
@@ -29,7 +29,7 @@ const router = useRouter()
 
 async function createUser() {
   createUserWithEmailAndPassword(
-    auth,
+    auth!,
     newUser.value.email,
     newUser.value.password
   )
@@ -46,7 +46,7 @@ async function createUser() {
 }
 
 async function signInUser() {
-  signInWithEmailAndPassword(auth, newUser.value.email, newUser.value.password)
+  signInWithEmailAndPassword(auth!, newUser.value.email, newUser.value.password)
     .then((userCredential) => {
       const user = userCredential.user
       console.log(user)

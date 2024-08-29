@@ -1,5 +1,5 @@
-<script setup>
-import { computed } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 import { deleteDoc, doc } from '@firebase/firestore'
 import { useFirestore } from 'vuefire'
 import BaseButton from '@/components/base/BaseButton.vue'
@@ -8,39 +8,26 @@ import BaseImageCard from '@/components/base/BaseImageCard.vue'
 import BaseRating from '@/components/base/BaseRating.vue'
 import CafeImage from '@/components/CafeImage.vue'
 
-const props = defineProps({
-  description: {
-    type: String,
-    default: 'No review yet',
-  },
-  docId: {
-    type: String,
-    required: true,
-  },
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
-  location: {
-    type: String,
-    default: 'United States',
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    default: 1,
-  },
-  rating: {
-    type: Number,
-    default: 0,
-  },
-})
+const props = defineProps<{
+  docId: string
+  description?: string
+  favorite?: boolean
+  location?: string
+  name?: string
+  price?: number
+  rating?: number | string
+}>()
+
+const description = ref(props.description || 'No review yet')
+const docId = ref(props.docId || true)
+const favorite = ref(props.favorite || false)
+// const location = ref(props.location || 'United States')
+const name = ref(props.name || '')
+const price = ref(props.price || 1)
+const rating = ref(props.rating || 0)
 
 const priceSymbol = computed(() => {
-  switch (props.price) {
+  switch (price.value) {
     case 1:
       return '$ - Less than $10'
     case 2:

@@ -1,5 +1,5 @@
-<script setup>
-import NavItems from './NavItems.vue'
+<script setup lang="ts">
+import NavItems from '@/components/NavItems.vue'
 </script>
 
 <template>
